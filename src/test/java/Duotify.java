@@ -10,9 +10,10 @@ public class Duotify {
 
     }
     @Test
-    public void navigateToDuotify() {
+    public void navigateToDuotify() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
+
         driver.get("http://duotify.us-east-2.elasticbeanstalk.com/register.php");
         Assert.assertEquals(driver.getTitle(), "Welcome to Duotify!");
         driver.findElement(By.id("hideLogin")).click();
@@ -51,10 +52,13 @@ public class Duotify {
         Assert.assertEquals(currentUrl, "http://duotify.us-east-2.elasticbeanstalk.com/browse.php?");
 
         driver.findElement(By.id("nameFirstAndLast")).getText().equals(fName + " " + lName);
+        Thread.sleep(2000);
         driver.findElement(By.tagName("h1")).getText().equals(fName + " " + lName);
+        Thread.sleep(10000);
         driver.findElement(By.id("rafael")).click();
 
         String currentUrl2 = driver.getCurrentUrl();
+        Thread.sleep(5000);
         Assert.assertEquals(currentUrl2, "http://duotify.us-east-2.elasticbeanstalk.com/register.php");
 
         driver.findElement(By.id("loginUsername")).sendKeys(usrn);
@@ -64,10 +68,13 @@ public class Duotify {
         driver.findElement(By.id("mainContent")).getText().contains("You Might Also Like");
 
         driver.findElement(By.id("rafael")).click();
+        driver.quit();
+
+
+        }
         
 
 
     }
 
 
-}
